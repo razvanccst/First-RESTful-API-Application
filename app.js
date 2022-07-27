@@ -130,6 +130,22 @@ app
         }
       }
     );
+  })
+
+  // PUT REQUEST - chained to above GET SPECIFIC
+  // Routing to the "Get Specific article" the new PUT method
+
+  .put(function (req, res) {
+    Article.update(
+      { title: req.params.articleTitle }, // selecting specific article
+      { title: req.body.title, content: req.body.content }, // setting the new title and content via POSTMAN
+      { overwrite: true },
+      function (err) {
+        if (!err) {
+          res.send("Succesfully updated article");
+        }
+      }
+    );
   });
 
 app.listen(3000, function () {
