@@ -146,6 +146,22 @@ app
         }
       }
     );
+  })
+
+  // PATCH REQUEST - UPDATE GIVEN ARTICLE
+
+  .patch(function (req, res) {
+    Article.update(
+      { title: req.params.articleTitle }, // selecting specific article by route
+      { $set: req.body },
+      function (err) {
+        if (!err) {
+          res.send("Successful updated article.");
+        } else {
+          res.send(err);
+        }
+      }
+    );
   });
 
 app.listen(3000, function () {
