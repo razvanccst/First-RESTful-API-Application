@@ -111,6 +111,27 @@ app
     );
   });
 
+//Get specific article
+
+app
+  .route("/articles/:articleTitle") // get article by title -- NOTE ":" added before choosen route name
+  .get(function (req, res) {
+    // read from DB
+    // search by requested parameter
+    console.log(req.params.articleTitle);
+
+    Article.findOne(
+      { title: req.params.articleTitle },
+      function (err, foundArticle) {
+        if (foundArticle) {
+          res.send(foundArticle);
+        } else {
+          res.send("No articles matching that title is found.");
+        }
+      }
+    );
+  });
+
 app.listen(3000, function () {
   console.log("Server started on port 3000");
 });
